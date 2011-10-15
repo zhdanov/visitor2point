@@ -1,1 +1,31 @@
 Конвертирование данных из Google Analytics в поинты, исходя из бюджета.
+
+Из-за того что на github в комментариях никак не отобразить тэги, помещу пока сюда.
+
+#3 Вывод статистики в админке WordPress
+Строка в таблице
+wp-admin/includes/class-wp-posts-list-table.php
+533:
+<td align="right"><div title="Посетителей за месяц">9847</div></td>
+
+Шапка
+wp-admin/includes/class-wp-list-table.php
+660:
+$tmp = array();
+foreach ($columns as $k => $v) {
+  $tmp[$k] = $v;
+  if($k == 'cb') {
+    $tmp['visitors'] = '<div title="Посетителей за месяц" align="center"><img src="/visitors.png" border="0" /></div>';
+  }
+}
+$columns = $tmp;
+672:
+if ( 'cb' == $column_key ) {
+  $class[] = 'check-column';
+} elseif ( 'visitors' == $column_key ) {
+  $class[] = 'num';
+  $style = 'style="width: 42px;"';
+}
+elseif ( in_array( $column_key, array( 'posts', 'comments', 'links' ) ) ) {
+  $class[] = 'num';
+}
