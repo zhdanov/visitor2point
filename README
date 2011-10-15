@@ -29,3 +29,12 @@ if ( 'cb' == $column_key ) {
 elseif ( in_array( $column_key, array( 'posts', 'comments', 'links' ) ) ) {
   $class[] = 'num';
 }
+
+Профиль
+wp-admin/admin-header.php
+184:
+<?php $links_js = '<li><a id="v2pTransaction" href="#">Вывести средства</a></li>'
+                  . '<li><a id="v2pGAUpdate" href="#">Обновить статистику</a></li>'
+                  . '<li><a id="v2pBudget" href="#">Распределить бюджет</a></li>'
+                  . $links_js; ?>
+<p>0.00 руб | <?php echo $howdy; ?></p>
