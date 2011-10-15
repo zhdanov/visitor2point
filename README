@@ -36,5 +36,6 @@ wp-admin/admin-header.php
 <?php $links_js = '<li><a id="v2pTransaction" href="#">Вывести средства</a></li>'
                   . '<li><a id="v2pGAUpdate" href="#">Обновить статистику</a></li>'
                   . '<li><a id="v2pBudget" href="#">Распределить бюджет</a></li>'
+                  . '<li><a id="v2pRequests" href="#">Запросы на оплату</a></li>'
                   . $links_js; ?>
 <p>0.00 руб | <?php echo $howdy; ?></p>
