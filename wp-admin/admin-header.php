@@ -181,12 +181,106 @@ $links_js = '<li>' . implode( '</li><li>', $links ) . '</li>';
 	<p class="hide-if-js"><?php echo "$howdy | $links_no_js"; ?></p>
 
 	<div class="hide-if-no-js">
-<?php $links_js = '<li><a id="v2pTransaction" href="#">Вывести средства</a></li>'
-                  . '<li><a id="v2pGAUpdate" href="#">Обновить статистику</a></li>'
-                  . '<li><a id="v2pBudget" href="#">Распределить прибыль</a></li>'
-                  . '<li><a id="v2pRequests" href="#">Запросы на оплату</a></li>'
-                  . $links_js; ?>
+<?php
+  /* v2p */
+?>
+<style>
+#basic-modal-content {display:none;}
+
+/* Overlay */
+#simplemodal-overlay {background-color:#ccc; cursor:wait;}
+
+/* Container */
+#simplemodal-container {height:200px; width:300px; background-color:#fff; border:4px solid #444; padding:12px;}
+#simplemodal-container .simplemodal-data {padding:8px;}
+#simplemodal-container a.modalCloseImg {background:url(/wp-admin/images/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+
+/* v2p */
+#v2pMakeRequestWindow {display:none;}
+#v2pImportGAWindow {display:none;}
+#v2pTransactionWindow {display:none;}
+#v2pRequestsWindow {display:none;}
+
+.v2pDescription {width:283px; height: 83px;}
+.v2pField {width:283px;}
+.v2pSubmit {width:283px;}
+
+#v2pImportGAWindowMessage{display:none; height:176px; display:table-cell; vertical-align:middle;}
+</style>
+<script src="/wp-admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="/wp-admin/js/jquery.simplemodal.1.4.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#v2pMakeRequest').click(function(){
+    $('#basic-modal-content').modal();
+    $('#v2pMakeRequestWindow').show();
+    return false;
+  });
+  $('#v2pImportGA').click(function(){
+    $('#basic-modal-content').modal();
+    $('#v2pImportGAWindow').show();
+    return false;
+  });
+  $('#v2pTransaction').click(function(){
+    $('#basic-modal-content').modal();
+    $('#v2pTransactionWindow').show();
+    return false;
+  });
+  $('#v2pRequests').click(function(){
+    $('#basic-modal-content').modal();
+    $('#v2pRequestsWindow').show();
+    return false;
+  });
+});
+</script>
+<!-- modal content -->
+<div id="basic-modal-content">
+  <!-- Вывод средств -->
+  <div id="v2pMakeRequestWindow">
+    <form action="" method="POST">
+      <div class='wp-submenu-head'>Укажите номер кошелька WebMoney или другие реквизиты:</div>
+      <p><textarea class="v2pDescription" name="description"></textarea></p>
+      <p><input class="v2pSubmit" type="submit" value="Создать запрос на вывод средств"/></p>
+    </form>
+  </div>
+  <!-- Обновление статистики -->
+  <div id="v2pImportGAWindow">
+    <div id="v2pImportGAWindowMessage" class='wp-submenu-head'>Статистика от Google Analytics успешно обновлена.</div>
+  </div>
+  <!-- Распределение прибыли -->
+  <div id="v2pTransactionWindow">
+    <form action="" method="POST">
+      <p><div class='wp-submenu-head'><strong>Внимание! Введённая сумма будет распределена между авторами.</strong></div></p>
+      <p><div class='wp-submenu-head'>Укажите сумму в рублях:</div></p>
+      <p><input type="text" class="v2pField" name="profit" /></p>
+      <p><input class="v2pSubmit" type="submit" value="Распределить"/></p>
+    </form>
+  </div>
+  <!-- Запросы на оплату -->
+  <div id="v2pRequestsWindow">
+    <form action="" method="POST">
+      <p><div class='wp-submenu-head'>Табличка с полями: Дата, Автор, Сумма, Оплачено(кнопка).</div></p>
+      <!--<p><input class="v2pSubmit" type="submit" value="Оплачено"/></p>-->
+    </form>
+  </div>
+</div>
+
+		<!-- preload the images -->
+		<div style='display:none'>
+			<img src='img/basic/x.png' alt='' />
+		</div>
+<?php
+  $links_js = '<li><a id="v2pMakeRequest" href="#">Вывести средства</a></li>'
+              . '<li><a id="v2pImportGA" href="#">Обновить статистику</a></li>'
+              . '<li><a id="v2pTransaction" href="#">Распределить прибыль</a></li>'
+              . '<li><a id="v2pRequests" href="#">Запросы на оплату</a></li>'
+              . $links_js;
+?>
 <p>0.00 руб | <?php echo $howdy; ?></p>
+
+<?php
+  /* /v2p */
+?>
 		<div id="user_info_arrow"></div>
 		<div id="user_info_links_wrap"><div id="user_info_links">
 			<ul><?php echo $links_js; ?></ul>

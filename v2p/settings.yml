@@ -1,4 +1,3 @@
-jQueryPath:
 db:
   driver:   mysql
   host:     localhost
