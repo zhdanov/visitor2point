@@ -1,0 +1,10 @@
+jQueryPath:
+db:
+  driver:   mysql
+  host:     localhost
+  db:       jg
+  user:     jg
+  password: jg
+google:
+  email:  
+  password:
