@@ -39,3 +39,20 @@ wp-admin/admin-header.php
                   . '<li><a id="v2pRequests" href="#">Запросы на оплату</a></li>'
                   . $links_js; ?>
 <p>0.00 руб | <?php echo $howdy; ?></p>
+
+#1 Импорт данных из Google Analytics
+Feed:
+http://code.google.com/intl/ru/apis/analytics/docs/gdata/gdataReferenceDataFeed.html
+
+Dimensions & Metrics Reference:
+http://code.google.com/apis/analytics/docs/gdata/gdataReferenceDimensionsMetrics.html
+
+Mastering Unique Visitors in the API:
+http://analytics.blogspot.com/2011/02/mastering-unique-visitors-in-api.html
+
+Data Feed Query Explorer:
+http://code.google.com/apis/analytics/docs/gdata/gdataExplorer.html?metrics=ga%253Avisitors&start-date=2011-01-01&end-date=2011-01-31
+
+Что потребуется:
+* ga:hostname или ga:pagePath (для интереса посмотреть ga:pageTitle)
+* ga:visitors, ga:newVisits
