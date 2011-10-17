@@ -205,25 +205,64 @@ $links_js = '<li>' . implode( '</li><li>', $links ) . '</li>';
 .v2pField {width:283px;}
 .v2pSubmit {width:283px;}
 
-#v2pImportGAWindowMessage{display:none; height:176px; display:table-cell; vertical-align:middle;}
+#v2pImportGAWindowMessage {display:none; height:176px; display:table-cell; vertical-align:middle;}
+#v2pImportGAWindowPreload {display:none; width:276px; text-align:center; height:176px; display:table-cell; vertical-align:middle;}
 </style>
 <script src="/wp-admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
 <script src="/wp-admin/js/jquery.simplemodal.1.4.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/wp-admin/js/jquery.form.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
   $('#v2pMakeRequest').click(function(){
     $('#basic-modal-content').modal();
     $('#v2pMakeRequestWindow').show();
+    $('#v2pMakeRequestForm').ajaxForm({
+      dataType:'json',
+      success:function(data){
+        if(data && data.status == 1) {
+          alert('ok!');
+        } else {
+          alert('error');
+        }
+      }
+    });
     return false;
   });
   $('#v2pImportGA').click(function(){
     $('#basic-modal-content').modal();
     $('#v2pImportGAWindow').show();
+    $('#v2pImportGAWindowMessage').hide();
+    $('#v2pImportGAWindowPreload').show();
+    $.ajax({
+      type: "POST",
+      url: "../v2p/importGA.php",
+      data: "start=1",
+      dataType: "json",
+      success: function(data) {
+        if(data && data.status == 1) {
+          $('#v2pImportGAWindowPreload').hide();
+          $('#v2pImportGAWindowMessage').show();
+        } else {
+          $('#v2pImportGAWindowPreload').hide();
+          alert('error');
+        }
+      }
+    });
     return false;
   });
   $('#v2pTransaction').click(function(){
     $('#basic-modal-content').modal();
     $('#v2pTransactionWindow').show();
+    $('#v2pMakeTransactionForm').ajaxForm({
+      dataType:'json',
+      success:function(data){
+        if(data && data.status == 1) {
+          alert('ok!');
+        } else {
+          alert('error');
+        }
+      }
+    });
     return false;
   });
   $('#v2pRequests').click(function(){
@@ -237,7 +276,8 @@ $(document).ready(function(){
 <div id="basic-modal-content">
   <!-- Вывод средств -->
   <div id="v2pMakeRequestWindow">
-    <form action="" method="POST">
+    <form action="../v2p/request.php" method="POST" id="v2pMakeRequestForm">
+      <input type="hidden" name="v2pMakeRequest" value="1" />
       <div class='wp-submenu-head'>Укажите номер кошелька WebMoney или другие реквизиты:</div>
       <p><textarea class="v2pDescription" name="description"></textarea></p>
       <p><input class="v2pSubmit" type="submit" value="Создать запрос на вывод средств"/></p>
@@ -245,11 +285,13 @@ $(document).ready(function(){
   </div>
   <!-- Обновление статистики -->
   <div id="v2pImportGAWindow">
+    <div id="v2pImportGAWindowPreload"><img src="/wp-admin/images/preloader.png" border="0" /></div>
     <div id="v2pImportGAWindowMessage" class='wp-submenu-head'>Статистика от Google Analytics успешно обновлена.</div>
   </div>
   <!-- Распределение прибыли -->
   <div id="v2pTransactionWindow">
-    <form action="" method="POST">
+    <form action="../v2p/transaction.php" id="v2pMakeTransactionForm" method="POST">
+      <input type="hidden" name="v2pMakeTransaction" value="1" />
       <p><div class='wp-submenu-head'><strong>Внимание! Введённая сумма будет распределена между авторами.</strong></div></p>
       <p><div class='wp-submenu-head'>Укажите сумму в рублях:</div></p>
       <p><input type="text" class="v2pField" name="profit" /></p>
