@@ -219,10 +219,11 @@ $(document).ready(function(){
     $('#v2pMakeRequestForm').ajaxForm({
       dataType:'json',
       success:function(data){
-        if(data && data.status == 1) {
-          alert('ok!');
+        if(data && data.request_id && data.status == 1) {
+          $('#v2pMakeRequestWindow').html('Запрос создан. Номер: <strong>'+data.request_id+'</strong>. Ожидайте оплаты.');
         } else {
-          alert('error');
+          $('#v2pMakeRequestMessage').html('Произошла ошибка. Попробуйте повторить попытку.');
+          $('#v2pMakeRequestMessage').css('color','red');
         }
       }
     });
@@ -246,7 +247,9 @@ $(document).ready(function(){
           $('#v2pImportGAWindowMessage').show();
         } else {
           $('#v2pImportGAWindowPreload').hide();
-          alert('error');
+          $('#v2pImportGAWindowMessage').html('Произошла ошибка. Попробуйте повторить попытку.');
+          $('#v2pImportGAWindowMessage').css('color','red');
+          $('#v2pImportGAWindowMessage').show();
         }
       }
     });
@@ -259,9 +262,10 @@ $(document).ready(function(){
       dataType:'json',
       success:function(data){
         if(data && data.status == 1) {
-          alert('ok!');
+          $('#v2pTransactionWindow').html('Прибыль успешно распределена.');
         } else {
-          alert('error');
+          $('#v2pMakeTransactionMessage').html('Произошла ошибка. Попробуйте повторить попытку.');
+          $('#v2pMakeTransactionMessage').css('color','red');
         }
       }
     });
@@ -281,7 +285,7 @@ $(document).ready(function(){
   <div id="v2pMakeRequestWindow">
     <form action="../v2p/request.php" method="POST" id="v2pMakeRequestForm">
       <input type="hidden" name="v2pMakeRequest" value="1" />
-      <div class='wp-submenu-head'>Укажите номер кошелька WebMoney или другие реквизиты:</div>
+      <div class='wp-submenu-head' id="v2pMakeRequestMessage">Укажите номер кошелька WebMoney или другие реквизиты:</div>
       <p><textarea class="v2pDescription" name="description"></textarea></p>
       <p><input class="v2pSubmit" type="submit" value="Создать запрос на вывод средств"/></p>
     </form>
@@ -296,7 +300,7 @@ $(document).ready(function(){
   <div id="v2pTransactionWindow">
     <form action="../v2p/transaction.php" id="v2pMakeTransactionForm" method="POST">
       <input type="hidden" name="v2pMakeTransaction" value="1" />
-      <p><div class='wp-submenu-head'><strong>Внимание! Введённая сумма будет распределена между авторами.</strong></div></p>
+      <p><div class='wp-submenu-head' id="v2pMakeTransactionMessage"><strong>Внимание! Введённая сумма будет распределена между авторами.</strong></div></p>
       <p><div class='wp-submenu-head'>Укажите сумму в рублях:</div></p>
       <p><input type="text" class="v2pField" name="profit" /></p>
       <p><input class="v2pSubmit" type="submit" value="Распределить"/></p>
