@@ -196,10 +196,10 @@ $links_js = '<li>' . implode( '</li><li>', $links ) . '</li>';
 #simplemodal-container a.modalCloseImg {background:url(/wp-admin/images/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
 
 /* v2p */
-#v2pMakeRequestWindow {display:none;}
 #v2pImportGAWindow {display:none;}
 #v2pTransactionWindow {display:none;}
 #v2pRequestsWindow {display:none;}
+#v2pMakeRequestWindow {display:none; height:176px; display:table-cell; vertical-align:middle;}
 
 .v2pDescription {width:283px; height: 83px;}
 .v2pField {width:283px;}
@@ -207,6 +207,7 @@ $links_js = '<li>' . implode( '</li><li>', $links ) . '</li>';
 
 #v2pImportGAWindowMessage {display:none; height:176px; display:table-cell; vertical-align:middle;}
 #v2pImportGAWindowPreload {display:none; width:276px; text-align:center; height:176px; display:table-cell; vertical-align:middle;}
+
 </style>
 <script src="/wp-admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
 <script src="/wp-admin/js/jquery.simplemodal.1.4.1.min.js" type="text/javascript"></script>
@@ -220,7 +221,7 @@ $(document).ready(function(){
       dataType:'json',
       success:function(data){
         if(data && data.request_id && data.status == 1) {
-          $('#v2pMakeRequestWindow').html('Запрос создан. Номер: <strong>'+data.request_id+'</strong>. Ожидайте оплаты.');
+          $('#v2pMakeRequestWindow').html('Создан запрос №<strong>'+data.request_id+'</strong>. Ожидайте оплаты.');
         } else {
           $('#v2pMakeRequestMessage').html('Произошла ошибка. Попробуйте повторить попытку.');
           $('#v2pMakeRequestMessage').css('color','red');
