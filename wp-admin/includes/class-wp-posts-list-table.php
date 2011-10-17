@@ -529,8 +529,13 @@ class WP_Posts_List_Table extends WP_List_Table {
 				}
 				else {
 					$attributes = 'class="post-title page-title column-title"' . $style;
+/*v2p*/
+require_once(dirname(__FILE__).'/../../v2p/classes/PostVisitor.class.php');
+$pv = new PostVisitor();
+$ga_visitors = $pv->getVisitors4PostId($post->ID);
+/*/v2p*/
 ?>
-			<td align="right"><div title="Посетителей за месяц">9847</div></td><td <?php echo $attributes ?>><strong><?php if ( $can_edit_post && $post->post_status != 'trash' ) { ?><a class="row-title" href="<?php echo $edit_link; ?>" title="<?php echo esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ); ?>"><?php echo $title ?></a><?php } else { echo $title; }; _post_states( $post ); ?></strong>
+			<?php/*v2p*/?><td align="right"><div title="Посетителей за месяц"><?= $ga_visitors ?></div></td><?php/*/v2p*/?><td <?php echo $attributes ?>><strong><?php if ( $can_edit_post && $post->post_status != 'trash' ) { ?><a class="row-title" href="<?php echo $edit_link; ?>" title="<?php echo esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ); ?>"><?php echo $title ?></a><?php } else { echo $title; }; _post_states( $post ); ?></strong>
 <?php
 					if ( 'excerpt' == $mode ) {
 						the_excerpt();

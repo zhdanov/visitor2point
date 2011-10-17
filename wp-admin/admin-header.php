@@ -199,7 +199,7 @@ $links_js = '<li>' . implode( '</li><li>', $links ) . '</li>';
 #v2pImportGAWindow {display:none;}
 #v2pTransactionWindow {display:none;}
 #v2pRequestsWindow {display:none;}
-#v2pMakeRequestWindow {display:none; height:176px; display:table-cell; vertical-align:middle;}
+#v2pMakeRequestWindow { height:176px; display:table-cell; vertical-align:middle;}
 
 .v2pDescription {width:283px; height: 83px;}
 .v2pField {width:283px;}
@@ -214,6 +214,8 @@ $links_js = '<li>' . implode( '</li><li>', $links ) . '</li>';
 <script type="text/javascript" src="/wp-admin/js/jquery.form.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
+  $('#v2pMakeRequestWindow').hide();
+
   $('#v2pMakeRequest').click(function(){
     $('#basic-modal-content').modal();
     $('#v2pMakeRequestWindow').show();

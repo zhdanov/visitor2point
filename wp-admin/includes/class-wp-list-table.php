@@ -657,6 +657,7 @@ class WP_List_Table {
 			$current_order = 'desc';
 		else
 			$current_order = 'asc';
+/* v2p */
 $tmp = array();
 foreach ($columns as $k => $v) {
   $tmp[$k] = $v;
@@ -665,6 +666,7 @@ foreach ($columns as $k => $v) {
   }
 }
 $columns = $tmp;
+/* /v2p */
 		foreach ( $columns as $column_key => $column_display_name ) {
 			$class = array( 'manage-column', "column-$column_key" );
 
@@ -677,10 +679,12 @@ $columns = $tmp;
 			if ( 'cb' == $column_key ) {
 				$class[] = 'check-column';
                         }
+/* v2p */
                         elseif ( 'visitors' == $column_key ) {
                                 $class[] = 'num';
                                 $style = 'style="width: 42px;"';
                         }
+/* /v2p */
 			elseif ( in_array( $column_key, array( 'posts', 'comments', 'links' ) ) ) {
 				$class[] = 'num';
                         }

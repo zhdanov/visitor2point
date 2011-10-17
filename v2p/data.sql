@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `v2p_post_visitor` (
   `post_visitor_id` int(11) NOT NULL auto_increment,
-  `post` int(11) NOT NULL,
-  `visitor` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `visitors` int(11) NOT NULL,
   PRIMARY KEY  (`post_visitor_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
