@@ -228,6 +228,8 @@ $(document).ready(function(){
     });
     return false;
   });
+
+<?php if (current_user_can('manage_options')) { ?> 
   $('#v2pImportGA').click(function(){
     $('#basic-modal-content').modal();
     $('#v2pImportGAWindow').show();
@@ -270,6 +272,7 @@ $(document).ready(function(){
     $('#v2pRequestsWindow').show();
     return false;
   });
+<?php } ?>
 });
 </script>
 <!-- modal content -->
@@ -283,9 +286,10 @@ $(document).ready(function(){
       <p><input class="v2pSubmit" type="submit" value="Создать запрос на вывод средств"/></p>
     </form>
   </div>
+<?php if (current_user_can('manage_options')) { ?>
   <!-- Обновление статистики -->
   <div id="v2pImportGAWindow">
-    <div id="v2pImportGAWindowPreload"><img src="/wp-admin/images/preloader.png" border="0" /></div>
+    <div id="v2pImportGAWindowPreload"><img src="/wp-admin/images/preloader.gif" border="0" /></div>
     <div id="v2pImportGAWindowMessage" class='wp-submenu-head'>Статистика от Google Analytics успешно обновлена.</div>
   </div>
   <!-- Распределение прибыли -->
@@ -305,18 +309,24 @@ $(document).ready(function(){
       <!--<p><input class="v2pSubmit" type="submit" value="Оплачено"/></p>-->
     </form>
   </div>
+<?php } ?>
 </div>
 
-		<!-- preload the images -->
-		<div style='display:none'>
-			<img src='img/basic/x.png' alt='' />
-		</div>
+<!-- preload the images -->
+<div style='display:none'>
+  <img src='img/basic/x.png' alt='' />
+</div>
 <?php
+if (current_user_can('manage_options')) {
+  $links_js = '<li><a id="v2pImportGA" href="#">Обновить статистику</a></li>'
+            . '<li><a id="v2pTransaction" href="#">Распределить прибыль</a></li>'
+            . '<li><a id="v2pRequests" href="#">Запросы на оплату</a></li>'
+            . $links_js;
+} else {
   $links_js = '<li><a id="v2pMakeRequest" href="#">Вывести средства</a></li>'
-              . '<li><a id="v2pImportGA" href="#">Обновить статистику</a></li>'
-              . '<li><a id="v2pTransaction" href="#">Распределить прибыль</a></li>'
-              . '<li><a id="v2pRequests" href="#">Запросы на оплату</a></li>'
               . $links_js;
+}
+
 ?>
 <p>0.00 руб | <?php echo $howdy; ?></p>
 
