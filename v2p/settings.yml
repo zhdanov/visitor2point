@@ -1,9 +1,11 @@
 db:
   driver:   mysql
   host:     localhost
-  db:       jg
-  user:     jg
-  password: jg
-google:
-  email:  
+  db:
+  user:
   password:
+ga:
+  email:
+  password:
+  profile_id:
+  max_results: 1000
