@@ -662,7 +662,7 @@ $tmp = array();
 foreach ($columns as $k => $v) {
   $tmp[$k] = $v;
   if($k == 'cb') {
-    $tmp['visitors'] = '<div title="Посетителей за месяц" align="center"><img src="/visitors.png" border="0" /></div>';
+    $tmp['visitors'] = '<div title="Посетителей за месяц" align="center"><img src="/wp-admin/images/visitors.png" border="0" /></div>';
   }
 }
 $columns = $tmp;
