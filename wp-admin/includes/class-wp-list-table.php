@@ -661,7 +661,7 @@ class WP_List_Table {
 $tmp = array();
 foreach ($columns as $k => $v) {
   $tmp[$k] = $v;
-  if($k == 'cb') {
+  if($k == 'cb' && $_SERVER['REQUEST_URI'] == '/wp-admin/edit.php') {
     $tmp['visitors'] = '<div title="Посетителей за месяц" align="center"><img src="/wp-admin/images/visitors.png" border="0" /></div>';
   }
 }
